@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'welcome/contact'
 
+  #added my route to faq page
   get 'welcome/faq'
 
 #default page the app will load

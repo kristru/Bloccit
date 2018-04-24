@@ -15,6 +15,7 @@ RSpec.describe WelcomeController, type: :controller do
     end
   end
 
+  #added my faq test
   describe "GET faq" do
     it "renders the faq template" do
       get :faq
