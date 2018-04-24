@@ -13,5 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+.nav a {
+   color: purple;
+ }
 @import "bootstrap-sprockets";
 @import "bootstrap";
