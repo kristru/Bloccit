@@ -23,6 +23,9 @@ posts = Post.all
     body: RandomData.random_paragraph
   )
 end
+puts "#{Post.count} before Post.find_or_create_by"
+Post.find_or_create_by(title:"Unique Post", body:"A unique body")
+puts "#{Post.count} after Post.find_or_create_by"
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
