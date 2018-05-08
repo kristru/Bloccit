@@ -30,3 +30,23 @@ puts "#{Post.count} after Post.find_or_create_by"
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+
+#create advertisements
+30.times do
+  Advertisement.create!(
+    title: RandomData.random_sentence,
+    copy: RandomData.random_sentence,
+    price: RandomData.random_price
+  )
+end
+
+posts = Advertisement.all
+
+
+puts "#{Advertisement.count} before Advertisement.find_or_create_by"
+Advertisement.find_or_create_by(title:"Unique Advertisement", copy:"A unique body")
+puts "#{Advertisement.count} after Advertisement.find_or_create_by"
+
+puts "Seed finished"
+puts "#{Advertisement.count} posts created"
+puts "#{Comment.count} comments created"
