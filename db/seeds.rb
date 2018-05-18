@@ -40,7 +40,7 @@ puts "#{Comment.count} comments created"
   )
 end
 
-posts = Advertisement.all
+advertisements = Advertisement.all
 
 
 puts "#{Advertisement.count} before Advertisement.find_or_create_by"
@@ -50,3 +50,23 @@ puts "#{Advertisement.count} after Advertisement.find_or_create_by"
 puts "Seed finished"
 puts "#{Advertisement.count} posts created"
 puts "#{Comment.count} comments created"
+
+#create questions
+30.times do
+  Question.create!(
+    title: RandomData.random_question,
+    body: RandomData.random_sentence,
+    resolved: false
+  )
+end
+
+questions = Questions.all
+
+
+puts "#{Questions.count} before Questions.find_or_create_by"
+Questions.find_or_create_by(title:"Unique Questions", body:"A unique body")
+puts "#{Questions.count} after Questions.find_or_create_by"
+
+puts "Seed finished"
+puts "#{Questions.count} questions created"
+puts "#{Answers.count} answers created"

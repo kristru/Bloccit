@@ -1,0 +1,10 @@
+<h1 class="center">All Questions</h1>
+<% @questions.each do |question| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 clas="media-heading">
+        <%= link_to question.title, question%>
+      </h4>
+    </div>
+  </div>
+<% end %>
