@@ -3,6 +3,8 @@ resources :advertisements
 
 resources :posts
 
+resources :questions
+
 get 'about' => 'welcome#about'
 
   get 'welcome/contact'
