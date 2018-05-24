@@ -7,9 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'random_data'
 
+#create Topics
+15.times do
+   Topic.create!(
+     name:         RandomData.random_sentence,
+     description:  RandomData.random_paragraph
+   )
+ end
+topics = Topic.all
+
 #create posts
 50.times do
   Post.create!(
+    topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
   )
@@ -62,11 +72,12 @@ end
 
 questions = Questions.all
 
-
 puts "#{Questions.count} before Questions.find_or_create_by"
 Questions.find_or_create_by(title:"Unique Questions", body:"A unique body")
 puts "#{Questions.count} after Questions.find_or_create_by"
 
 puts "Seed finished"
+puts "#{Topic.count} topics created"
+puts "#{Comments.count} comments created"
 puts "#{Questions.count} questions created"
 puts "#{Answers.count} answers created"
