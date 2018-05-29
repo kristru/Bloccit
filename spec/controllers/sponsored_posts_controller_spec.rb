@@ -4,7 +4,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
   #create a parent topic named my_topic
   let(:my_topic) {Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
   #we update how we create sponsored_post so that it belongs to my_topic
-  let(:sponsored_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_price ) }
+  let(:sponsored_post) { my_topic.sponsored_posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_price ) }
 
   describe "GET show" do
     it "returns http success" do
@@ -45,7 +45,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
     it "redirects to the new post" do
       post :create, params: { topic_id: my_topic.id, sponsored_post: { title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_price } }
-      expect(response).to redirect_to [my_topic, SponsoredPosts.last]
+      expect(response).to redirect_to [my_topic, SponsoredPost.last]
     end
   end
 
@@ -99,13 +99,13 @@ RSpec.describe SponsoredPostsController, type: :controller do
   describe "DELETE destroy" do
     it "deletes the sponsored post" do
       delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       count = SponsoredPosts.where({id: sponsored_post.id}).size
+       count = SponsoredPost.where({id: sponsored_post.id}).size
        expect(count).to eq 0
     end
 
     it "redirects to topic show" do
        delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       expect(response).to redirect_to sponsored_post_topic
+       expect(response).to redirect_to my_topic
      end
   end
 
