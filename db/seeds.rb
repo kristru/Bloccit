@@ -70,14 +70,26 @@ puts "#{Comment.count} comments created"
   )
 end
 
-questions = Questions.all
+questions = Question.all
 
-puts "#{Questions.count} before Questions.find_or_create_by"
-Questions.find_or_create_by(title:"Unique Questions", body:"A unique body")
-puts "#{Questions.count} after Questions.find_or_create_by"
+#create sponsoredPosts
+10.times do
+  SponsoredPost.create!(
+    topic: topics.sample,
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: RandomData.random_price
+  )
+end
+
+sponsored_post = SponsoredPost.all
+
+puts "#{Question.count} before Questions.find_or_create_by"
+Question.find_or_create_by(title:"Unique Questions", body:"A unique body")
+puts "#{Question.count} after Questions.find_or_create_by"
 
 puts "Seed finished"
 puts "#{Topic.count} topics created"
-puts "#{Comments.count} comments created"
-puts "#{Questions.count} questions created"
-puts "#{Answers.count} answers created"
+puts "#{Comment.count} comments created"
+puts "#{Question.count} questions created"
+puts "#{SponsoredPost.count} Sponsored Posts created"
