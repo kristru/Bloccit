@@ -105,7 +105,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
     it "redirects to topic show" do
        delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       expect(response).to redirect_to my_topic
+       expect(response).to redirect_to my_topic_id
      end
   end
 
