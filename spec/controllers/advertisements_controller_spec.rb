@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AdvertisementsControllerController, type: :controller do
+RSpec.describe AdvertisementsController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
