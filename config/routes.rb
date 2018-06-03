@@ -7,6 +7,7 @@ resources :topics do
 end
 
 resources :questions
+resources :users, only: [:new, :create]
 
 get 'about' => 'welcome#about'
 
