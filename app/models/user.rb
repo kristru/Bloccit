@@ -2,6 +2,7 @@ class User < ApplicationRecord
 #registers an inline callback direcctly after the before_save callback
 #{} is the code that will run when the callback executes
   before_save { self.email = email.downcase if email.present? }
+  before_save :format_name
 
 #this ensures that name is present
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
@@ -19,4 +20,14 @@ class User < ApplicationRecord
 #Adds methods to set and authenticate against a BCrypt password. This requires you to
 #to have a password_digest attribute.
   has_secure_password
+
+  def format_name
+    if name
+      names_array = []
+      name.split.each do |names|
+        names_array << names.capitalize
+      end
+      self.name = names_array.join(' ')
+    end
+  end
 end
