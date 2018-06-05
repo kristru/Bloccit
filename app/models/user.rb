@@ -9,8 +9,8 @@ class User < ApplicationRecord
 #first validation executes if password_digest is nil
 #secord ensures that when updating a password it meets requirements.
   #allow_blank:true allows us to change other attributes with having to change password.
- validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
- validates :password, length: { minimum: 6 }, allow_blank: true
+  validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
   validates :email,
             presence: true,
@@ -27,7 +27,7 @@ class User < ApplicationRecord
       name.split.each do |names|
         names_array << names.capitalize
       end
-      self.name = names_array.join(' ')
+      name = names_array.join(' ')
     end
   end
 end
