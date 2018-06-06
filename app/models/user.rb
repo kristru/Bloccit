@@ -27,7 +27,7 @@ class User < ApplicationRecord
       name.split.each do |names|
         names_array << names.capitalize
       end
-      name = names_array.join(' ')
+      self.name = names_array.join(' ')
     end
   end
 end
