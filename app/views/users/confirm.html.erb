@@ -3,11 +3,13 @@
   <h3>Are you sure these values are correct?</h3>
   <hr />
 </div>
-<div class="row center">
-  <p>Email:</p>
-  <p>Name:</p>
-</div>
-<div class="row center">
-  <button type="button" class="btn btn-success">Yes</button>
-  <button type="button" class="btn btn-danger">No</button>
-</div>
+<% if user_params %>
+  <div class="row center">
+    <p>Email: <%= @user.email %></p>
+    <p>Name: <%= @user.name %></p>
+  </div>
+  <div class="center">
+      <%= link_to "Yes", { controller: "users", action: "create", params: { user: user_params } }, class: 'btn btn-success' %>
+      <%= link_to "No", { controller: "users", action: "new" }, class: 'btn btn-danger', method: :get %>
+  </div>
+<% end -%>

@@ -7,9 +7,11 @@ resources :topics do
 end
 
 resources :questions
-resources :users, only: [:new, :create] do
-  get 'confirm'
-end
+resources :users, only: [:new, :create]
+
+post 'users/confirm' => 'users#confirm'
+
+get 'users' =>'users#create'
 
 get 'about' => 'welcome#about'
 
@@ -20,6 +22,4 @@ get 'about' => 'welcome#about'
 
 #default page the app will load
   root 'welcome#index'
-
-  post 'users/confirm'
 end
