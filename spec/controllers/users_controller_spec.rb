@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
 #this is creating a hash of attr. to test through spec
   let(:new_user_attributes) do
     {
-        name: "BlocHead",
+        name: "Bloc Head",
         email: "blochead@bloc.io",
         password: "blochead",
         password_confirmation: "blochead"
@@ -54,6 +54,10 @@ RSpec.describe UsersController, type: :controller do
         post :create, params: { user: new_user_attributes }
         expect(assigns(:user).password_confirmation).to eq new_user_attributes[:password_confirmation]
       end
+      it "logs the user in after sign up" do
+       post :create, params: { user: new_user_attributes }
+       expect(session[:user_id]).to eq assigns(:user).id
+     end
     end
 
 end
