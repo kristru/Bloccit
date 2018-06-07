@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
 
 a {
   color: purple;
@@ -21,17 +23,22 @@ a {
 h1 {
   text-align: center;
 }
-.nav a {
-   color: purple;
- }
 
 .center {
   text-align: center;
+}
+
+.gravatar{
+  padding: 10px 10px;
 }
 
 .list a {
   color: purple;
 }
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
+.nav-tabs {
+  padding-bottom: 10px;
+}
+.nav a {
+   color: purple;
+ }
