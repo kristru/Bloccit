@@ -1,4 +1,7 @@
-<h1 class="center"><%= @post.title %></h1>
+<div class="row center">
+  <h1 class="center"><%= @post.title %><br /></h1>
+  <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
+</div>
 
 <div class="row center">
   <div>

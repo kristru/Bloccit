@@ -83,7 +83,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
        expect(updated_post.id).to eq sponsored_post.id
        expect(updated_post.title).to eq new_title
        expect(updated_post.body).to eq new_body
-       expect(updated_post.price).to eq new_price
+       expect(updated_post.price).to eq new_price.to_i
     end
 
     it "redirects to the updated post" do
@@ -105,7 +105,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
     it "redirects to topic show" do
        delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       expect(response).to redirect_to my_topic_id
+       expect(response).to redirect_to my_topic_show
      end
   end
 
