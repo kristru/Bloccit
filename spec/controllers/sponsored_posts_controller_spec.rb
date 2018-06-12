@@ -56,7 +56,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
     end
 
     it "renders the #edit view" do
-      get :edit, topic_id: my_topic.id, id: sponsored_post.id
+      get :edit, params: { topic_id: my_topic.id, id: sponsored_post.id }
       expect(response).to render_template :edit
     end
 
@@ -105,7 +105,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
     it "redirects to topic show" do
        delete :destroy, params: { topic_id: my_topic.id, id: sponsored_post.id }
-       expect(response).to redirect_to my_topic_show
+       expect(response).to have_http_status(:redirect)
      end
   end
 
