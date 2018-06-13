@@ -3,12 +3,12 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-  default_scope {order('created_at DESC')}
-  scope :ordered_by_title, -> {order('title DESC')}
-  scope :ordered_by_reverse_created_at, -> {order('created_at ASC').unscope(:order)}
+  default_scope {order('created_at ASC')}
+  scope :ordered_by_title, -> {order('title ASC')}
+  scope :ordered_by_reverse_created_at, -> {order('title ASC')}
   #also tried:
   #scope :ordered_by_reverse_created_at, -> {order('created_at ASC')}
-  
+
 
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
