@@ -27,7 +27,54 @@ RSpec.describe User, type: :model do
          user.name = "bloc user"
          user.save
          expect(user.name).to eq "Bloc User"
+       end
+#expect users to respond to role
+       it "responds to role" do
+         expect(user).to respond_to(:role)
+       end
+#will return whether or not a user is an admin.
+#This is implemented with ActiveRecord::Enum
+       it "responds to admin?" do
+         expect(user).to respond_to(:admin?)
+       end
+
+#returns whether or not a user is a member
+       it "responds to member?" do
+         expect(user).to respond_to(:member?)
+       end
      end
+
+     describe "roles" do
+       it "is member by default" do
+         expect(user.role).to eql("member")
+       end
+
+#tests member and admin users within seperate contexts
+     context "member user" do
+       it "returns true for #member?" do
+         expect(user.member?).to be_truthy
+       end
+
+       it "returns false for #admin?" do
+         expect(user.admin?).to be_falsey
+       end
+     end
+
+ # #6
+     context "admin user" do
+       before do
+         user.admin!
+       end
+
+       it "returns false for #member?" do
+         expect(user.member?).to be_falsey
+       end
+
+       it "returns true for #admin?" do
+         expect(user.admin?).to be_truthy
+       end
+     end
+   end
 
      describe "invalid user" do
         let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
@@ -42,4 +89,3 @@ RSpec.describe User, type: :model do
         end
       end
     end
-end

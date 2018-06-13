@@ -4,6 +4,8 @@ class User < ApplicationRecord
 #{} is the code that will run when the callback executes
   before_save { self.email = email.downcase if email.present? }
   before_save :format_name
+#||= shorthand for self.role = :member if self.role.nil?
+  before_save { self.role ||= :member }
 
 #this ensures that name is present
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
@@ -21,6 +23,8 @@ class User < ApplicationRecord
 #Adds methods to set and authenticate against a BCrypt password. This requires you to
 #to have a password_digest attribute.
   has_secure_password
+
+  enum role: [:member, :admin]
 
   def format_name
     if name
