@@ -6,6 +6,11 @@ resources :topics do
   resources :sponsored_posts, except: [:index]
 end
 
+#only:[] is used so /posrs/:id routes aren't created. Only posts/:post_is/comments
+resources :posts, only: [] do
+  resources :comments, only: [:create, :destroy]
+end
+
 resources :questions
 resources :users, only: [:new, :create]
 resources :sessions, only: [:new, :create, :destroy]

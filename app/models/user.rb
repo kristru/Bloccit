@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 #registers an inline callback direcctly after the before_save callback
 #{} is the code that will run when the callback executes
   before_save { self.email = email.downcase if email.present? }
