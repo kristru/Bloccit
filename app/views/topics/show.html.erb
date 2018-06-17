@@ -19,19 +19,7 @@
     <%= link_to "+", new_topic_post_path(@topic), class: 'btn btn-success btn-sm' %>
   <% end %>
 </h3>
-<% @topic.posts.each do |post| %>
-       <div class="media list">
-         <div class="media-body">
-           <h4 class="media-heading">
-             <%= link_to post.title, topic_post_path(@topic, post) %>
-           </h4>
-           <small>
-             submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
-             <%= post.comments.count %> comments
-           </small>
-         </div>
-       </div>
-  <% end %>
+<%= render @topic.posts %>
 
 <h3>
   Sponsored Posts
