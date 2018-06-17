@@ -42,6 +42,10 @@ GEM
     autoprefixer-rails (8.3.0)
       execjs
     bcrypt (3.1.12)
+    bootstrap (4.1.1)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -81,6 +85,7 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pg (1.0.0)
+    popper_js (1.12.9)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -187,6 +192,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  bootstrap (~> 4.1.1)
   bootstrap-sass
   jbuilder (~> 2.5)
   jquery-rails
