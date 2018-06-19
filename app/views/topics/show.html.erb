@@ -1,11 +1,33 @@
-<h1><%= @topic.name %></h1>
-
-<div class="row">
-  <p class="lead center"><%= @topic.description %></p>
-  <div class="center">
-     <% if user_is_authorized_for_topics? %>
-      <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-info' %>
+<div class="container">
+<!--BEGIN TOPIC DESCRIPTION-->
+    <div class="row">
+      <h1><%= @topic.name %></h1>
+      <p class="lead center"><%= @topic.description %></p>
+      <div class="center">
+         <% if user_is_authorized_for_topics? %>
+          <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-info' %>
+        <% end %>
+        <% if current_user != nil && (current_user == @topic.id || current_user.admin?) %>
+          <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+         <% end %>
+      </div>
+        <% if user_is_authorized_for_topics? %>
+          <%= link_to "+", new_topic_post_path(@topic), class: 'btn btn-success btn-sm' %>
+        <% end %>
+    </div>
+<!--END TOPIC DESCRIPTION-->
+    <hr />
+<!--BEGIN POST LIST-->
+    <h3>
+      Posts
+    </h3>
+    <% @topic.posts.each do |post| %>
+      <div class="media">
+        <%= render partial: 'votes/voting', locals: {post: post } %>
+        <%= render @topic.posts %>
+      </div>
     <% end %>
+<<<<<<< HEAD
     <% if current_user != nil && (current_user == @topic.id || current_user.admin?) %>
       <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
      <% end %>
@@ -20,19 +42,25 @@
   <% end %>
 </h3>
 <%= render @topic.posts %>
+=======
+<!--END POST LIST-->
+>>>>>>> railsVoting_CP
 
-<h3>
-  Sponsored Posts
-  <% if user_is_authorized_for_topics? %>
-   <%= link_to "+", new_topic_sponsored_post_path(@topic), class: 'btn btn-success btn-sm' %>
-  <% end %>
-</h3>
-  <% @topic.sponsored_posts.each do |sponsored_post| %>
-       <div class="media list">
-         <div class="media-body">
-           <h4 class="media-heading">
-             <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %>
-           </h4>
+<!--BEGIN SPONSORED POSTS -->
+    <h3>
+      Sponsored Posts
+      <% if user_is_authorized_for_topics? %>
+       <%= link_to "+", new_topic_sponsored_post_path(@topic), class: 'btn btn-success btn-sm' %>
+      <% end %>
+    </h3>
+    <% @topic.sponsored_posts.each do |sponsored_post| %>
+         <div class="media list">
+           <div class="media-body">
+             <h4 class="media-heading">
+               <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %>
+             </h4>
+           </div>
          </div>
-       </div>
-  <% end %>
+    <% end %>
+<!-- END SPONSORED POSTS -->
+</div>
