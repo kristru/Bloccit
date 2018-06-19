@@ -25,7 +25,7 @@ RSpec.describe VotesController, type: :controller do
 
   context "signed in user" do
     before do
-      set_session(my_user)
+      set_session[my_user]
       request.env["HTTP_REFERER"] = topic_post_path(my_topic, user_post)
     end
 
