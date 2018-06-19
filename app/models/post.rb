@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
-  default_scope {order('rank ASC')}
+  default_scope {order('rank DESC')}
   scope :ordered_by_title, -> {order('title ASC')}
   scope :ordered_by_reverse_created_at, -> {order('title ASC')}
   #also tried:
