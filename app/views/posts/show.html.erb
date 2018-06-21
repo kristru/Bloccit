@@ -1,23 +1,31 @@
 <div class="container">
-    <!-- BEGIN POST TITLE AND DESCRIPTION -->
-      <div class="row center">
-        <h1 class="center"><%= @post.title %><br /></h1>
-        <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
-        <!-- BEGIN VOTES SUMMARY -->
+  <!-- BEGIN POST TITLE AND DESCRIPTION -->
+    <div class="row">
+      <div class="col-md-8">
+         <h2><%= @post.title %><br /></h2>
+         <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
+         <p><%= @post.body %></p>
+      </div>
+      <!-- BEGIN VOTES SUMMARY -->
+      <div class="col-md-4 d-flex align-items-md-center">
+        <div style="margin:1em; padding-right:1em;">
+          <%= render partial: 'votes/voting', locals: { post: @post } %>
+        </div>
         <h3>
-        <small>
-            <strong><%= pluralize(@post.points, 'point') %></strong> |
-            <%= pluralize(@post.up_votes, 'up vote') %>,
-            <%= pluralize(@post.down_votes, 'down vote') %>
+          <small>
+            <strong><%= pluralize(@post.points, 'point') %></strong>
+            <div>
+              <%= pluralize(@post.up_votes, 'up vote') %>,
+              <%= pluralize(@post.down_votes, 'down vote') %>
+            </div>
           </small>
         </h3>
-        <!-- END VOTES SUMMARY -->
-        <div class="row">
-            <p><%= @post.body %></p>
-        </div>
       </div>
-    <!-- END TITLE AND DESCRIPTION -->
+    </div>
+    <!-- END VOTES SUMMARY -->
 
+    </div>
+    <!-- BEGIN POST TITLE AND DESCRIPTION -->
 
     <hr />
 
@@ -45,7 +53,6 @@
 
       <hr />
 
-
     <!-- BEGIN COMMENTS SECTION -->
       <div class="row">
         <div>
@@ -53,18 +60,15 @@
            <%= render @post.comments %>
          </div>
       </div>
-    </div>
     <!-- END VOTES SUMMARY -->
+
+    <% if user_is_authorized_for_post?(@post) %>
+      <div class="row center">
+        <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-info' %>
+      <%# Here we override the method(:post) with :delete, so that the when the button is clicked the route called is delete %>
+    <% end %>
+    <% if current_user != nil && (current_user == @post.user || current_user.admin?) %>
+        <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post? All comments will also be deleted.'} %>
+      </div>
+    <% end %>
 </div>
-<<<<<<< HEAD
-<% if user_is_authorized_for_post?(@post) %>
-  <div class="row center">
-    <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-info' %>
-  <%# Here we override the method(:post) with :delete, so that the when the button is clicked the route called is delete %>
-<% end %>
-<% if current_user != nil && (current_user == @post.user || current_user.admin?) %>
-    <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post? All comments will also be deleted.'} %>
-  </div>
-<% end %>
-=======
->>>>>>> railsVoting_CP

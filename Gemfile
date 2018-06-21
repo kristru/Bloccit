@@ -8,6 +8,8 @@ source 'https://rubygems.org'
  # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
  gem 'rails', '~> 5.1.2'
 
+ gem 'sprockets-rails', '~> 3.2.1'
+
  # #1
  group :production do
    # Use pg as the production database for Active Record
@@ -48,7 +50,7 @@ source 'https://rubygems.org'
    gem 'shoulda'
  end
 
- gem 'bootstrap-sass'
  # Used for encrypting passwords
  gem 'bcrypt'
  gem 'bootstrap', '~> 4.1.1'
+ gem 'bootstrap-sass'
