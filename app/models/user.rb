@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 #registers an inline callback direcctly after the before_save callback
 #{} is the code that will run when the callback executes
   before_save { self.email = email.downcase if email.present? }
@@ -37,4 +38,9 @@ class User < ApplicationRecord
       self.name = names_array.join(' ')
     end
   end
+
+  def favorite_for(post)
+    favorites.where(post_id: post.id).first
+  end
+
 end
