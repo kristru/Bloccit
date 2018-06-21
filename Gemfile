@@ -52,5 +52,4 @@ source 'https://rubygems.org'
 
  # Used for encrypting passwords
  gem 'bcrypt'
- gem 'bootstrap', '~> 4.1.1'
  gem 'bootstrap-sass'
