@@ -52,4 +52,7 @@ source 'https://rubygems.org'
 
  # Used for encrypting passwords
  gem 'bcrypt'
+
  gem 'bootstrap-sass'
+
+ gem 'figaro', '1.0'
