@@ -2,15 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   #creates new instance of a post class, computes and stores given values
-  let(:name) { RandomData.random_sentence }
-   let(:description) { RandomData.random_paragraph }
-   let(:title) { RandomData.random_sentence }
-   let(:body) { RandomData.random_paragraph }
- # #3
-   let(:topic) { Topic.create!(name: name, description: description) }
- # #4
-   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-   let(:post) { topic.posts.create!(title: title, body: body, user: user) }
+
+   let(:topic) { create(:topic) }
+   let(:user) { create(:user) }
+   let(:post) { create(:post) }
 
    it { is_expected.to have_many(:comments) }
    it { is_expected.to have_many(:votes) }
