@@ -1,42 +1,42 @@
 <div class="container">
-  <!-- BEGIN POST TITLE AND DESCRIPTION -->
-    <div class="row">
-      <div class="col-lg-1 vote-arrows">
-          <%= render partial: 'votes/voting', locals: { post: @post } %>
-      </div>
+  <!-- START POST INFO ROW //////////////-->
+  <div class="row">
+    <!-- BEGIN VOTES ARROWS -->
+    <div class="col-lg-1">
+        <%= render partial: 'votes/voting', locals: { post: @post } %>
+    </div>
+    <!-- END VOTES ARROWS -->
+
+    <!-- BEGIN POST INFO -->
+    <div class="col-md-8">
       <div class="col-md-8">
-         <h2><%= @post.title %><br /></h2>
-         <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
-         <p><%= @post.body %></p>
-      </div>
-      <!-- BEGIN VOTES SUMMARY -->
-      <div class="col-md-3">
         <div class="row">
-            <h3>
-              <small>
-                <strong><%= pluralize(@post.points, 'point') %></strong>
-                <div>
-                  <%= pluralize(@post.up_votes, 'up vote') %>,
-                  <%= pluralize(@post.down_votes, 'down vote') %>
-                </div>
-              </small>
-            </h3>
+           <h2><%= @post.title %><br /></h2>
+           <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
+           <p><%= @post.body %></p>
+         </div>
+      </div>
+    </div>
+    <!-- END POST INFO -->
+
+    <!-- BEGIN POST STATS -->
+    <div class="col-md-3">
+        <div class="row">
+          <h3>
+            <small>
+              <strong><%= pluralize(@post.points, 'point') %></strong>
+              <div>
+                <%= pluralize(@post.up_votes, 'up vote') %>,
+                <%= pluralize(@post.down_votes, 'down vote') %>
+              </div>
+            </small>
+          </h3>
         </div>
-<<<<<<< HEAD
-        <h3>
-          <small>
-            <strong><%= pluralize(@post.points, 'point') %></strong>
-            <div>
-              <%= pluralize(@post.up_votes, 'up vote') %>,
-              <%= pluralize(@post.down_votes, 'down vote') %>
-            </div>
-          </small>
-        </h3>
-        <% if current_user %>
-         <%= render partial: 'favorites/favorite', locals: { post: @post } %>
-        <% end %>
-=======
-        <!-- BEGIN CRUD ACTION BUTTONS -->
+        <div class="row">
+          <% if current_user %>
+           <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+          <% end %>
+        </div>
         <div class="row">
             <% if user_is_authorized_for_post?(@post) %>
                 <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-info' %>
@@ -46,36 +46,33 @@
                 <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post? All comments will also be deleted.'} %>
             <% end %>
         </div>
-        <!-- END CRUD ACTION BUTTONS -->
->>>>>>> railsVoting_AS
       </div>
-      <!-- END VOTES SUMMARY -->
     </div>
-    <!-- END POST TITLE AND DESCRIPTION -->
+    <!-- END POST STATS -->
+  </div>
+  <!-- END POST INFO ROW //////////////-->
 
+  <hr />
 
-    <hr />
-
-    <!-- BEGIN COMMENTS FORM -->
-      <div class="row center">
-        <div>
-          <% if current_user %>
-            <%= render 'comments/form', comment: Comment.new, post: @post %>
-          <% end %>
-        </div>
+  <!-- BEGIN COMMENTS FORM ////////////-->
+    <div class="row">
+      <div>
+        <% if current_user %>
+          <%= render 'comments/form', comment: Comment.new, post: @post %>
+        <% end %>
       </div>
-    <!-- END COMMENTS FORM -->
+    </div>
+  <!-- END COMMENTS FORM ///////////-->
 
+  <hr />
 
-      <hr />
-
-    <!-- BEGIN COMMENTS SECTION -->
+  <!-- BEGIN COMMENTS SECTION /////////-->
       <div class="row">
         <div>
            <h3>Comments</h3>
            <%= render @post.comments %>
          </div>
       </div>
-    <!-- END VOTES SUMMARY -->
+  <!-- END COMMENT SECTION //////////-->
 
 </div>

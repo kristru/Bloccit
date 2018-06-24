@@ -2,13 +2,11 @@
   <div class="media-body">
     <small>
       <%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago
-<<<<<<< HEAD
       <% if user_is_authorized_for_comment?(comment) %>
          | <%= link_to "Delete", [comment.post, comment], method: :delete %>
-=======
+         <% end %>
       <% if user_is_authorized_for_comment?(comment) || (comment.user == comment.id) %>
          |<strong> <%= link_to "Delete", [@post, comment], method: :delete %></strong>
->>>>>>> railsVoting_AS
        <% end %>
     </small>
     <p><%= comment.body %></p>
