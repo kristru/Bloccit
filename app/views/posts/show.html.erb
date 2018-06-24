@@ -1,77 +1,78 @@
 <div class="container">
-  <!-- BEGIN POST TITLE AND DESCRIPTION -->
-    <div class="row">
+  <!-- START POST INFO ROW //////////////-->
+  <div class="row">
+    <!-- BEGIN VOTES ARROWS -->
+    <div class="col-lg-1">
+        <%= render partial: 'votes/voting', locals: { post: @post } %>
+    </div>
+    <!-- END VOTES ARROWS -->
+
+    <!-- BEGIN POST INFO -->
+    <div class="col-md-8">
       <div class="col-md-8">
-         <h2><%= @post.title %><br /></h2>
-         <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
-         <p><%= @post.body %></p>
+        <div class="row">
+           <h2><%= @post.title %><br /></h2>
+           <h4>Submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %></h4>
+           <p><%= @post.body %></p>
+         </div>
       </div>
-      <!-- BEGIN VOTES SUMMARY -->
-      <div class="col-md-4 d-flex align-items-md-center">
-        <div style="margin:1em; padding-right:1em;">
-          <%= render partial: 'votes/voting', locals: { post: @post } %>
+    </div>
+    <!-- END POST INFO -->
+
+    <!-- BEGIN POST STATS -->
+    <div class="col-md-3">
+        <div class="row">
+          <h3>
+            <small>
+              <strong><%= pluralize(@post.points, 'point') %></strong>
+              <div>
+                <%= pluralize(@post.up_votes, 'up vote') %>,
+                <%= pluralize(@post.down_votes, 'down vote') %>
+              </div>
+            </small>
+          </h3>
         </div>
-        <h3>
-          <small>
-            <strong><%= pluralize(@post.points, 'point') %></strong>
-            <div>
-              <%= pluralize(@post.up_votes, 'up vote') %>,
-              <%= pluralize(@post.down_votes, 'down vote') %>
-            </div>
-          </small>
-        </h3>
-        <% if current_user %>
-         <%= render partial: 'favorites/favorite', locals: { post: @post } %>
-        <% end %>
-      </div>
-    </div>
-    <!-- END VOTES SUMMARY -->
-
-    </div>
-    <!-- BEGIN POST TITLE AND DESCRIPTION -->
-
-    <hr />
-
-    <!-- BEGIN COMMENTS FORM -->
-      <div class="row center">
-        <div>
+        <div class="row">
           <% if current_user %>
-            <%= render 'comments/form', comment: Comment.new, post: @post %>
+           <%= render partial: 'favorites/favorite', locals: { post: @post } %>
           <% end %>
         </div>
+        <div class="row">
+            <% if user_is_authorized_for_post?(@post) %>
+                <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-info' %>
+              <%# Here we override the method(:post) with :delete, so that the when the button is clicked the route called is delete %>
+            <% end %>
+            <% if current_user != nil && (current_user == @post.user || current_user.admin?) %>
+                <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post? All comments will also be deleted.'} %>
+            <% end %>
+        </div>
       </div>
-    <!-- END COMMENTS FORM -->
+    </div>
+    <!-- END POST STATS -->
+  </div>
+  <!-- END POST INFO ROW //////////////-->
 
-    <!-- BEGIN CRUD ACTION BUTTONS -->
-      <div class="row center">
-        <% if user_is_authorized_for_post?(@post) %>
-            <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-info' %>
-          <%# Here we override the method(:post) with :delete, so that the when the button is clicked the route called is delete %>
-        <% end %>
-        <% if current_user != nil && (current_user == @post.user || current_user.admin?) %>
-            <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post? All comments will also be deleted.'} %>
+  <hr />
+
+  <!-- BEGIN COMMENTS FORM ////////////-->
+    <div class="row">
+      <div>
+        <% if current_user %>
+          <%= render 'comments/form', comment: Comment.new, post: @post %>
         <% end %>
       </div>
-    <!-- END CRUD ACTION BUTTONS -->
+    </div>
+  <!-- END COMMENTS FORM ///////////-->
 
-      <hr />
+  <hr />
 
-    <!-- BEGIN COMMENTS SECTION -->
+  <!-- BEGIN COMMENTS SECTION /////////-->
       <div class="row">
         <div>
            <h3>Comments</h3>
            <%= render @post.comments %>
          </div>
       </div>
-    <!-- END VOTES SUMMARY -->
+  <!-- END COMMENT SECTION //////////-->
 
-    <% if user_is_authorized_for_post?(@post) %>
-      <div class="row center">
-        <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-info' %>
-      <%# Here we override the method(:post) with :delete, so that the when the button is clicked the route called is delete %>
-    <% end %>
-    <% if current_user != nil && (current_user == @post.user || current_user.admin?) %>
-        <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post? All comments will also be deleted.'} %>
-      </div>
-    <% end %>
 </div>
