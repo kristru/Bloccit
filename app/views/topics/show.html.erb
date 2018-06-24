@@ -23,7 +23,6 @@
     </h3>
     <% @topic.posts.each do |post| %>
       <div class="media">
-        <%= render partial: 'votes/voting', locals: {post: post } %>
         <%= render @topic.posts %>
       </div>
     <% end %>

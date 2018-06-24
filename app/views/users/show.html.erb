@@ -28,7 +28,10 @@
 
  <h2>Comments</h2>
    <% if @user.comments.count == 0 %>
-      <h5><%= no_comments(@user) %></h5>
+      <strong><%= no_comments(@user) %></strong>
     <%else%>
       <%= render @user.comments %>
    <% end %>
+
+   <h2>Favorited Posts</h2>
+      <%= render @user.posts %>
