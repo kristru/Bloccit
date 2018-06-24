@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
@@ -15,7 +16,7 @@ class User < ApplicationRecord
 #first validation executes if password_digest is nil
 #secord ensures that when updating a password it meets requirements.
   #allow_blank:true allows us to change other attributes with having to change password.
-  validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
+  validates :password, presence: true, length: { minimum: 6 }, if: -> { password_digest.nil? }
   validates :password, length: { minimum: 6 }, allow_blank: true
 
   validates :email,
