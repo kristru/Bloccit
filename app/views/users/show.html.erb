@@ -30,7 +30,10 @@
    <% if @user.comments.count == 0 %>
       <strong><%= no_comments(@user) %></strong>
     <%else%>
-      <%= render @user.comments %>
+    <%= render @user.comments %>
    <% end %>
 
    <h2>Favorited Posts</h2>
+   <% @user.favorites.each do |favorite| %>
+    <div><%= favorite.post.title %></div>
+   <% end %>
