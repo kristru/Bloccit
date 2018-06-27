@@ -46,7 +46,7 @@
 
               </div>
               <div class="media-body col-lg-11">
-                <h4><%= link_to favorite.post.title, topic_post_path(favorite.post) %></h4>
+                <h4><%= link_to favorite.post.title, topic_post_path(favorite, favorite.post) %></h4>
                 <small>
                     <%= pluralize(favorite.post.up_votes, 'up vote') %> |
                     <%= pluralize(favorite.post.down_votes, 'down vote') %> |
