@@ -4,6 +4,8 @@ module CommentsHelper
   end
 
   def no_comments(user)
-    "#{user.name} has not submitted any comments yet."
+    if user.comments.count == 0
+      "#{user.name} has not submitted any comments yet."
+    end
   end
 end

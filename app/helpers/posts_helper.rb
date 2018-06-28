@@ -4,6 +4,9 @@ module PostsHelper
   end
 
   def no_posts(user)
-    "#{user.name} has not submitted any posts yet."
+    if user.posts.count == 0
+      "#{user.name} has not submitted any posts yet."
+    end
   end
+
 end

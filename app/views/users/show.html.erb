@@ -21,42 +21,18 @@
      </div>
 
      <h2>Posts</h2>
-     <% if @user.posts.count == 0 %>
-        <h5><%= no_posts(@user) %></h5>
-      <%else%>
-        <%= render @user.posts %>
-     <% end %>
+     <strong><%= no_posts(@user) %></strong>
+     <%= render @user.posts %>
+
 
      <h2>Comments</h2>
-       <% if @user.comments.count == 0 %>
-          <strong><%= no_comments(@user) %></strong>
-        <%else%>
-        <%= render @user.comments %>
-       <% end %>
+     <strong><%= no_comments(@user) %></strong>
+     <%= render @user.comments %>
 
-    <div class="row">
-      <div class="favorites-list media-list">
-       <% if @user.favorites != nil %>
-          <h2>Favorited Posts</h2>
-         <% @user.favorites.each do |favorite| %>
-           <div class="favorite">
-              <div class="media-left col-lg-1">
-                <% author_avatar = favorite.post.user.avatar_url(30) %>
-                <%= image_tag author_avatar, class: 'media-object' %>
+     <h2>Favorited Posts</h2>
+     <strong><%= no_favorites(@user) %></strong>
+     <%= render @user.favorites %>
 
-              </div>
-              <div class="media-body col-lg-11">
-                <h4><%= link_to favorite.post.title, topic_post_path(favorite, favorite.post) %></h4>
-                <small>
-                    <%= pluralize(favorite.post.up_votes, 'up vote') %> |
-                    <%= pluralize(favorite.post.down_votes, 'down vote') %> |
-                    <%= pluralize(favorite.post.comments.size, 'comments') %>
-                </small>
-              </div>
-           <div>
-         <% end %>
-       <% end %>
-     </div>
-  </div>
+
 
 </div>

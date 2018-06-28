@@ -1,9 +1,15 @@
-<% if favorite = current_user.favorite_for(post) %>
-   <%= link_to [post, favorite], class: 'btn btn-danger', method: :delete do %>
-     <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unfavorite
-   <% end %>
- <% else %>
-   <%= link_to [post, Favorite.new], class: 'btn btn-primary', method: :post do %>
-     <i class="glyphicon glyphicon-star"> </i>&nbsp; Favorite
-   <% end %>
-<% end %>
+  <div class="favorites-list">
+     <div class="media-left col-lg-1">
+       <% author_avatar = favorite.post.user.avatar_url(30) %>
+       <%= image_tag author_avatar, class: 'media-object' %>
+
+     </div>
+     <div class="media-body col-lg-11">
+       <h4><%= link_to favorite.post.title, topic_post_path(favorite, favorite.post) %></h4>
+       <small>
+           <%= pluralize(favorite.post.up_votes, 'up vote') %> |
+           <%= pluralize(favorite.post.down_votes, 'down vote') %> |
+           <%= pluralize(favorite.post.comments.size, 'comments') %>
+       </small>
+     </div>
+  <div>
